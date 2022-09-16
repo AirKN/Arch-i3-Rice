@@ -176,7 +176,7 @@ battery() {
     echo -n "},"
   else
     echo -n ",{"
-    echo -n "\"name\":\"id_time\","
+    echo -n "\"name\":\"battery0\","
     echo -n "\"full_text\":\" 🔌 Plugged \","
     echo -n "\"color\":\"$textcl1\","
     echo -n "\"background\":\"$bg\","
@@ -247,7 +247,7 @@ do
   #systemupdate
   logout
   echo "]"
-	sleep 1
+	#sleep 1
 done) &
 
 # click events
@@ -278,11 +278,15 @@ do
 
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then
-    xdg-open https://openweathermap.org/city/2986140 > /dev/null &
+    xdg-open https://openweathermap.org/city/2464470 > /dev/null &
 
   # CRYPTO
   elif [[ $line == *"name"*"id_crypto"* ]]; then
     xdg-open https://www.livecoinwatch.com/ > /dev/null &
+
+  # BATTERY
+  elif [[ $line == *"name"*"battery0"* ]]; then
+    notify-send "⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡"  
 
   # VOLUME
   elif [[ $line == *"name"*"id_volume"* ]]; then

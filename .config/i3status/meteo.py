@@ -7,7 +7,8 @@ import urllib.request
 APPID = "xxx"
 
 # get you city ID at http://bulk.openweathermap.org/sample/
-CITYID = "2968815"
+#CITYID = "2968815"
+CITYID = "2464470"
 
 # {
 #     "coord": {

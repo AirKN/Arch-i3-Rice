@@ -8,8 +8,8 @@
 bg_bar_color="#1d2021"
 color1="#1d2021"
 color2="#fbf1c7"
-textcl1="#1d2021"
-textcl2="#fbf1c7"
+#textcl="#1d2021"
+textcl="#fbf1c7"
 
 # Print a left caret separator
 # @params {string} $1 text color, ex: "#FF0000"
@@ -97,33 +97,35 @@ myip_local() {
 com
 
 disk_usage() {
-  local bg="$color2"
-  separator $bg $color1
+  local bg="#cc241d"
+  separator $bg "$bg"
   echo -n ",{"
   echo -n "\"name\":\"id_disk_usage\","
-  echo -n "\"full_text\":\" 📝 $(~/.config/i3status/disk.py)%\","
+  echo -n "\"full_text\":\" 📂 $(~/.config/i3status/disk.py)% \","
   echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl1\","
+  echo -n "\"color\":\"$textcl\","
   common
   echo -n "}"
 }
 
 memory() {
+  local bg="#b16286"
   echo -n ",{"
   echo -n "\"name\":\"id_memory\","
-  echo -n "\"full_text\":\" 🪜 $(~/.config/i3status/memory.py)%\","
-  echo -n "\"background\":\"$color2\","
-  echo -n "\"color\":\"$textcl1\","
+  echo -n "\"full_text\":\" 📝 $(~/.config/i3status/memory.py)% \","
+  echo -n "\"background\":\"$bg\","
+  echo -n "\"color\":\"$textcl\","
   common
   echo -n "}"
 }
 
 cpu_usage() {
+  local bg="#689d6a"
   echo -n ",{"
   echo -n "\"name\":\"id_cpu_usage\","
   echo -n "\"full_text\":\" 🧠 $(~/.config/i3status/cpu.py)% \","
-  echo -n "\"background\":\"$color2\","
-  echo -n "\"color\":\"$textcl1\","
+  echo -n "\"background\":\"$bg\","
+  echo -n "\"color\":\"$textcl\","
   common
   echo -n "},"
 }
@@ -135,28 +137,43 @@ meteo() {
   echo -n "\"name\":\"id_meteo\","
   echo -n "\"full_text\":\" $(~/.config/i3status/meteo.sh) \","
   echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl2\","
+  echo -n "\"color\":\"$textcl\","
   common
   echo -n "},"
 }
 
 mydate() {
-  local bg="$color1"
-  separator $bg "$color2"
+  local bg="#fabd2f"
+  separator $bg "$bg"
   echo -n ",{"
-  echo -n "\"name\":\"id_time\","
-  echo -n "\"full_text\":\" ⏰ $(date "+%a %d %b %Y %H:%M") \","
+  echo -n "\"name\":\"id_date\","
+  echo -n "\"full_text\":\" 📅 $(date "+%a %d %b %Y") \","
   echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl2\","
+  echo -n "\"color\":\"$textcl\","
   common
   echo -n "},"
 }
 
+mytime() {
+  local bg="#cc241d"
+  separator $bg "$bg"
+  echo -n ",{"
+  echo -n "\"name\":\"id_time\","
+  echo -n "\"full_text\":\" ⌚ $(date "+%H:%M") \","
+  echo -n "\"background\":\"$bg\","
+  echo -n "\"color\":\"$textcl\","
+  common
+  echo -n "},"
+  separator $bg "$bg"
+}
+
+
+
 
 battery() {
-    local bg="$color2"
+    local bg="#458588"
     bg_separator_previous=$bg
-    separator $bg "$color1"
+    separator $bg "$bg"
 
   if [ -f /sys/class/power_supply/BAT0/uevent ]; then
     prct=$(cat /sys/class/power_supply/BAT0/uevent | grep "POWER_SUPPLY_CAPACITY=" | cut -d'=' -f2)
@@ -168,7 +185,7 @@ battery() {
     echo -n ",{"
     echo -n "\"name\":\"battery0\","
     echo -n "\"full_text\":\" ${icon} ${prct}% \","
-    echo -n "\"color\":\"$textcl1\","
+    echo -n "\"color\":\"$textcl\","
     echo -n "\"background\":\"$bg\","
     common
     echo -n "},"
@@ -176,7 +193,7 @@ battery() {
     echo -n ",{"
     echo -n "\"name\":\"battery0\","
     echo -n "\"full_text\":\" 🔌 Plugged \","
-    echo -n "\"color\":\"$textcl1\","
+    echo -n "\"color\":\"$textcl\","
     echo -n "\"background\":\"$bg\","
     common
     echo -n "},"
@@ -186,12 +203,10 @@ battery() {
 
 
 volume() {
-  #local bg="$color1"
-  #separator $bg $bg_separator_previous
   vol=$(pamixer --get-volume)
-  local bg="$color2"
+  local bg="#b8bb26"
   bg_separator_previous=$bg
-  separator $bg "$color1"
+  separator $bg "$bg"
   echo -n ",{"
   echo -n "\"name\":\"id_volume\","
   if [ $vol -le 0 ]; then
@@ -200,10 +215,9 @@ volume() {
     echo -n "\"full_text\":\" 🔊 ${vol}% \","
   fi
   echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl1\","
+  echo -n "\"color\":\"$textcl\","
   common
   echo -n "},"
-  separator $bg_bar_color $bg
 }
 
 <<br
@@ -241,10 +255,11 @@ do
   disk_usage
   memory
   cpu_usage
-  meteo
+  #meteo
   battery
-  mydate
   volume
+  mydate
+  mytime
   #systemupdate
   logout
   echo "]"
@@ -272,10 +287,15 @@ do
   elif [[ $line == *"name"*"id_disk_usage"* ]]; then
     notify-send "$(df -h)"
 
-  # TIME
-  elif [[ $line == *"name"*"id_time"* ]]; then
+  # DATE
+  elif [[ $line == *"name"*"id_date"* ]]; then
     #alacritty -e ~/.config/i3status/click_time.sh &
     notify-send "$(cal --months 2)"
+  
+  # TIME
+  elif [[ $line == *"name"*"id_time"* ]]; then
+    notify-send "Yes, This is Time ⌚, Yes"
+
 
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then

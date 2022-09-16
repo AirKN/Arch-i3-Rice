@@ -128,26 +128,24 @@ cpu_usage() {
   echo -n "},"
 }
 
-<<moc
 meteo() {
-  local bg="#546E7A"
+  local bg="$color1"
   separator $bg "$color1"
   echo -n ",{"
   echo -n "\"name\":\"id_meteo\","
-  echo -n "\"full_text\":\" $(~/.config/i3status/meteo.py) \","
+  echo -n "\"full_text\":\" $(~/.config/i3status/meteo.sh) \","
   echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl1\","
+  echo -n "\"color\":\"$textcl2\","
   common
   echo -n "},"
 }
-moc
 
 mydate() {
   local bg="$color1"
   separator $bg "$color2"
   echo -n ",{"
   echo -n "\"name\":\"id_time\","
-  echo -n "\"full_text\":\" ⏰ $(date "+%a %d/%m/%y %H:%M") \","
+  echo -n "\"full_text\":\" ⏰ $(date "+%a %d %b %Y %H:%M") \","
   echo -n "\"background\":\"$bg\","
   echo -n "\"color\":\"$textcl2\","
   common
@@ -188,18 +186,21 @@ battery() {
 
 
 volume() {
-  local bg="$color1"
-  separator $bg $bg_separator_previous
+  #local bg="$color1"
+  #separator $bg $bg_separator_previous
   vol=$(pamixer --get-volume)
+  local bg="$color2"
+  bg_separator_previous=$bg
+  separator $bg "$color1"
   echo -n ",{"
   echo -n "\"name\":\"id_volume\","
   if [ $vol -le 0 ]; then
-    echo -n "\"full_text\":\"  ${vol}% \","
+    echo -n "\"full_text\":\" 🔇 ${vol}% \","
   else
     echo -n "\"full_text\":\" 🔊 ${vol}% \","
   fi
   echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl2\","
+  echo -n "\"color\":\"$textcl1\","
   common
   echo -n "},"
   separator $bg_bar_color $bg
@@ -240,9 +241,9 @@ do
   disk_usage
   memory
   cpu_usage
-  #meteo
-  mydate
+  meteo
   battery
+  mydate
   volume
   #systemupdate
   logout
@@ -278,8 +279,7 @@ do
 
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then
-    xdg-open https://openweathermap.org/city/2464470 > /dev/null &
-
+    alacritty -e curl wttr.in/Tunisia; cat &
   # CRYPTO
   elif [[ $line == *"name"*"id_crypto"* ]]; then
     xdg-open https://www.livecoinwatch.com/ > /dev/null &

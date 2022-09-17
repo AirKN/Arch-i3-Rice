@@ -41,60 +41,6 @@ common() {
   echo -n "\"border_right\":0"
 }
 
-<<com
-mycrypto() {
-  local bg="#FFD180"
-  separator $bg $bg_bar_color
-  echo -n ",{"
-  echo -n "\"name\":\"id_crypto\","
-  echo -n "\"full_text\":\" $(~/.config/i3status/crypto.py) \","
-  echo -n "\"color\":\"#000000\","
-  echo -n "\"background\":\"$bg\","
-  common
-  echo -n "},"
-}
-
-
-myip_public() {
-  local bg="#1976D2"
-  separator $bg "#FFD180"
-  echo -n ",{"
-  echo -n "\"name\":\"ip_public\","
-  echo -n "\"full_text\":\" $(~/.config/i3status/ip.py) \","
-  echo -n "\"background\":\"$bg\","
-  common
-  echo -n "},"
-}
-
-
-myvpn_on() {
-  local bg="#424242" # grey darken-3
-  local icon=""
-  if [ -d /proc/sys/net/ipv4/conf/proton0 ]; then
-    bg="#E53935" # rouge
-    icon=""
-  fi
-  separator $bg "#1976D2" # background left previous block
-  bg_separator_previous=$bg
-  echo -n ",{"
-  echo -n "\"name\":\"id_vpn\","
-  echo -n "\"full_text\":\" ${icon} VPN \","
-  echo -n "\"background\":\"$bg\","
-  common
-  echo -n "},"
-}
-
-myip_local() {
-  local bg="#2E7D32" # vert
-  separator $bg $bg_separator_previous
-  echo -n ",{"
-  echo -n "\"name\":\"ip_local\","
-  echo -n "\"full_text\":\"  $(ip route get 1 | sed -n 's/.*src \([0-9.]\+\).*/\1/p') \","
-  echo -n "\"background\":\"$bg\","
-  common
-  echo -n "},"
-}
-com
 
 disk_usage() {
   local bg="#cc241d"
@@ -120,7 +66,7 @@ memory() {
 }
 
 cpu_usage() {
-  local bg="#689d6a"
+  local bg="#458588"
   echo -n ",{"
   echo -n "\"name\":\"id_cpu_usage\","
   echo -n "\"full_text\":\" 🧠 $(~/.config/i3status/cpu.py)% \","
@@ -129,6 +75,7 @@ cpu_usage() {
   common
   echo -n "},"
 }
+
 
 meteo() {
   local bg="$color1"
@@ -142,49 +89,33 @@ meteo() {
   echo -n "},"
 }
 
-mydate() {
-  local bg="#fabd2f"
-  separator $bg "$bg"
-  echo -n ",{"
-  echo -n "\"name\":\"id_date\","
-  echo -n "\"full_text\":\" 📅 $(date "+%a %d %b %Y") \","
-  echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "},"
-}
-
-mytime() {
-  local bg="#cc241d"
-  separator $bg "$bg"
-  echo -n ",{"
-  echo -n "\"name\":\"id_time\","
-  echo -n "\"full_text\":\" ⌚ $(date "+%H:%M") \","
-  echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "},"
-  separator $bg "$bg"
-}
-
-
-
 
 battery() {
-    local bg="#458588"
+    local bg="#689d6a"
     bg_separator_previous=$bg
     separator $bg "$bg"
 
   if [ -f /sys/class/power_supply/BAT0/uevent ]; then
     prct=$(cat /sys/class/power_supply/BAT0/uevent | grep "POWER_SUPPLY_CAPACITY=" | cut -d'=' -f2)
     charging=$(cat /sys/class/power_supply/BAT0/uevent | grep "POWER_SUPPLY_STATUS" | cut -d'=' -f2) # POWER_SUPPLY_STATUS=Discharging|Charging
-    icon="🔋"
-    if [ "$charging" == "Charging" ]; then
-      icon=""
+    if [ $prct -eq 100 ]; then
+    	icon="🔋"
+    elif [ $prct -ge 75 ]; then
+	icon=""
+    elif [ $prct -ge 50 ]; then
+	icon=""
+    elif [ $prct -ge 25 ]; then
+	icon=""
+    elif [ $prct -ge 0 ]; then
+	icon=""
+    fi
+    if [ "$charging" == "Charging" ]; then	icon="⚡${icon}"
+    else
+      icon="💻${icon}"
     fi
     echo -n ",{"
     echo -n "\"name\":\"battery0\","
-    echo -n "\"full_text\":\" ${icon} ${prct}% \","
+    echo -n "\"full_text\":\" ${icon}  ${prct}% \","
     echo -n "\"color\":\"$textcl\","
     echo -n "\"background\":\"$bg\","
     common
@@ -220,17 +151,32 @@ volume() {
   echo -n "},"
 }
 
-<<br
-systemupdate() {
-  local nb=$(checkupdates | wc -l)
-  if (( $nb > 0)); then
-    echo -n ",{"
-    echo -n "\"name\":\"id_systemupdate\","
-    echo -n "\"full_text\":\"  ${nb}\""
-    echo -n "}"
-  fi
+
+mydate() {
+  local bg="#fabd2f"
+  separator $bg "$bg"
+  echo -n ",{"
+  echo -n "\"name\":\"id_date\","
+  echo -n "\"full_text\":\" 📅 $(date "+%a %d %b %Y") \","
+  echo -n "\"background\":\"$bg\","
+  echo -n "\"color\":\"$textcl\","
+  common
+  echo -n "},"
 }
-br
+
+mytime() {
+  local bg="#cc241d"
+  separator $bg "$bg"
+  echo -n ",{"
+  echo -n "\"name\":\"id_time\","
+  echo -n "\"full_text\":\" ⌚ $(date "+%H:%M") \","
+  echo -n "\"background\":\"$bg\","
+  echo -n "\"color\":\"$textcl\","
+  common
+  echo -n "},"
+  separator $bg "$bg"
+}
+
 
 logout() {
   echo -n ",{"
@@ -247,11 +193,7 @@ echo '[]'                   # We send an empty first array of blocks to make the
 # Now send blocks with information forever:
 (while :;
 do
-	echo -n ",["
-  #mycrypto
-  #myip_public
-  #myvpn_on
-  #myip_local
+  echo -n ",["
   disk_usage
   memory
   cpu_usage
@@ -260,10 +202,9 @@ do
   volume
   mydate
   mytime
-  #systemupdate
   logout
   echo "]"
-	#sleep 1
+  #sleep 1
 done) &
 
 # click events
@@ -272,16 +213,8 @@ do
   # echo $line > /home/you/gitclones/github/i3/tmp.txt
   # {"name":"id_vpn","button":1,"modifiers":["Mod2"],"x":2982,"y":9,"relative_x":67,"relative_y":9,"width":95,"height":22}
 
-  # VPN click
-  if [[ $line == *"name"*"id_vpn"* ]]; then
-    alacritty -e ~/.config/i3status/click_vpn.sh &
-
-  # CHECK UPDATES
-  elif [[ $line == *"name"*"id_systemupdate"* ]]; then
-    alacritty -e ~/.config/i3status/click_checkupdates.sh &
-
-  # CPU
-  elif [[ $line == *"name"*"id_cpu_usage"* ]] || [[ $line == *"name"*"id_memory"* ]]; then
+ # CPU
+  if [[ $line == *"name"*"id_cpu_usage"* ]] || [[ $line == *"name"*"id_memory"* ]]; then
     alacritty -e htop &
 
   elif [[ $line == *"name"*"id_disk_usage"* ]]; then
@@ -296,15 +229,11 @@ do
   elif [[ $line == *"name"*"id_time"* ]]; then
     notify-send "Yes, This is Time ⌚, Yes"
 
-
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then
     alacritty -e curl wttr.in/Tunisia; cat &
-  # CRYPTO
-  elif [[ $line == *"name"*"id_crypto"* ]]; then
-    xdg-open https://www.livecoinwatch.com/ > /dev/null &
 
-  # BATTERY
+ # BATTERY
   elif [[ $line == *"name"*"battery0"* ]]; then
     notify-send "⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡"  
 

@@ -196,7 +196,7 @@ do
   disk_usage
   memory
   cpu_usage
-  meteo
+  #meteo
   battery
   volume
   mydate

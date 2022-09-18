@@ -124,6 +124,7 @@ alias \
 	egrep='egrep --colour=auto' \
 	fgrep='fgrep --colour=auto' \
 	c='clear' \
+	gparted='sudo gparted' \
 	shut='shutdown now' \
 	ei3='vim ~/.config/i3/config' \
 	dmenu_run='dmenu_run -nb "#1d2021" -sf "#282828" -sb "#fbf1c7" -nf "#cfc6a1"' \

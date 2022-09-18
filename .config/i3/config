@@ -49,7 +49,7 @@ bindsym $mod+Return exec alacritty
 
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+a kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -nb "#1d2021" -sf "#282828" -sb "#fbf1c7" -nf "#cfc6a1"
@@ -95,7 +95,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -124,28 +124,41 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+ampersand workspace $ws1
-bindsym $mod+eacute workspace $ws2
-bindsym $mod+quotedbl workspace $ws3
-bindsym $mod+apostrophe workspace $ws4
-bindsym $mod+parenleft workspace $ws5
-bindsym $mod+minus workspace number $ws6
-bindsym $mod+egrave workspace number $ws7
-bindsym $mod+underscore workspace number $ws8
-bindsym $mod+ccedilla workspace number $ws9
-bindsym $mod+agrave workspace number $ws10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# switch to workspace
+#bindsym $mod+ampersand workspace $ws1
+#bindsym $mod+eacute workspace $ws2
+#bindsym $mod+quotedbl workspace $ws3
+#bindsym $mod+apostrophe workspace $ws4
+#bindsym $mod+parenleft workspace $ws5
+#bindsym $mod+minus workspace number $ws6
+#bindsym $mod+egrave workspace number $ws7
+#bindsym $mod+underscore workspace number $ws8
+#bindsym $mod+ccedilla workspace number $ws9
+#bindsym $mod+agrave workspace number $ws10
+
 
 # move focused container to workspace
-bindsym $mod+Shift+ampersand move container to workspace $ws1
-bindsym $mod+Shift+eacute move container to workspace $ws2
-bindsym $mod+Shift+quotedbl move container to workspace $ws3
-bindsym $mod+Shift+apostrophe move container to workspace $ws4
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+minus move container to workspace number $ws6
-bindsym $mod+Shift+egrave move container to workspace number $ws7
-bindsym $mod+Shift+underscore move container to workspace number $ws8
-bindsym $mod+Shift+ccedilla move container to workspace number $ws9
-bindsym $mod+Shift+agrave move container to workspace number $ws10
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 assign [class="firefox"] $ws3
 assign [class="VSCodium"] $ws2
@@ -265,18 +278,19 @@ bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 bindsym $mod+p exec mypaint
 bindsym $mod+c exec vscodium
 bindsym $mod+Shift+t exec rhythmbox
-bindsym $mod+Shift+z exec rhythmbox-client --play-pause; exec rhythmbox-client --set-volume 0.3
+bindsym $mod+Shift+w exec rhythmbox-client --play-pause; exec rhythmbox-client --set-volume 0.3
 bindsym $mod+Shift+d exec thunar
 bindsym $mod+Shift+s exec firefox
-bindsym $mod+Shift+q exec --no-startup-id ~/.local/bin/.bgrndrf.sh
+bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/.bgrndrf.sh
 bindsym $mod+s exec ~/.local/bin/dmenuunicode
-bindsym $mod+a exec obsidian
+bindsym $mod+q exec obsidian
 #bindsym $mod+w
 #bindsym $mod+x
 #bindsym $mod+Shift+w
 
 exec --no-startup-id ~/.local/bin/.bgrndrf.sh
 exec --no-startup-id dunst
+exec --no-startup-id syncthing --no-browser
 exec firefox
 exec obsidian
 exec rednotebook
@@ -284,7 +298,7 @@ exec picom &
 exec xset -b
 exec r rate 300 50
 
-exec_always "setxkbmap -model pc104 -layout fr,ar -variant ,, -option grp:lalt_lshift_toggle"
+exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:lalt_lshift_toggle"
 #jp -variant ,,kana
 
 #Screenshot bindings:

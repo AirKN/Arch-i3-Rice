@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # i3 config in ~/.config/i3/config :
 # bar {
@@ -196,7 +196,7 @@ do
   disk_usage
   memory
   cpu_usage
-  #meteo
+  meteo
   battery
   volume
   mydate
@@ -230,7 +230,7 @@ do
 
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then
-    alacritty -e curl wttr.in/Tunisia; cat &
+    alacritty -e w3m wttr.in/Tunisia
 
  # BATTERY
   elif [[ $line == *"name"*"battery0"* ]]; then

@@ -124,6 +124,7 @@ alias \
 	egrep='egrep --colour=auto' \
 	fgrep='fgrep --colour=auto' \
 	c='clear' \
+	hist='less $HISTFILE' \
 	gparted='sudo gparted' \
 	shut='shutdown now' \
 	ei3='vim ~/.config/i3/config' \

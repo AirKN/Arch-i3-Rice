@@ -41,6 +41,16 @@ common() {
   echo -n "\"border_right\":0"
 }
 
+titlebar() {
+  name=$(~/.config/i3status/title.sh)
+  separator $bg "$color1"
+  echo -n ",{"
+  echo -n "\"full_text\":\" $name                                                              \","
+  echo -n "\"color\":\"$textcl\","
+  common
+  echo -n "},"
+}
+
 
 disk_usage() {
   local bg="#cc241d"
@@ -55,10 +65,11 @@ disk_usage() {
 }
 
 memory() {
+  mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
   local bg="#b16286"
   echo -n ",{"
   echo -n "\"name\":\"id_memory\","
-  echo -n "\"full_text\":\" 📝 $(~/.config/i3status/memory.py)% \","
+  echo -n "\"full_text\":\" 📝 $mem \","
   echo -n "\"background\":\"$bg\","
   echo -n "\"color\":\"$textcl\","
   common
@@ -193,6 +204,7 @@ echo '[]'                   # We send an empty first array of blocks to make the
 (while :;
 do
   echo -n ",["
+  titlebar
   disk_usage
   memory
   cpu_usage
@@ -213,9 +225,15 @@ do
   # {"name":"id_vpn","button":1,"modifiers":["Mod2"],"x":2982,"y":9,"relative_x":67,"relative_y":9,"width":95,"height":22}
 
  # CPU
-  if [[ $line == *"name"*"id_cpu_usage"* ]] || [[ $line == *"name"*"id_memory"* ]]; then
-    alacritty -e htop &
+  if [[ $line == *"name"*"id_cpu_usage"* ]]; then
+    notify-send "CPU Temperature: $(sensors | awk '/^CPU:/ {print $2}')"
+    notify-send "Most CPU intensive processes(by %):
+$(ps axch -o cmd:40,%cpu --sort:-%cpu | head)"
 
+  elif [[ $line == *"name"*"id_memory"* ]]; then
+    notify-send "Most Memory intensive processes(by %):
+$(ps axch -o cmd:40,%mem --sort:-%mem | head)"
+  
   elif [[ $line == *"name"*"id_disk_usage"* ]]; then
     notify-send "$(df -h)"
 
@@ -229,8 +247,8 @@ do
     notify-send "Yes, This is Time ⌚, Yes"
 
   # METEO
-  elif [[ $line == *"name"*"id_meteo"* ]]; then
-    alacritty -e w3m wttr.in/Tunisia
+  #elif [[ $line == *"name"*"id_meteo"* ]]; then
+  #  alacritty -e w3m wttr.in/Tunisia
 
  # BATTERY
   elif [[ $line == *"name"*"battery0"* ]]; then
@@ -246,3 +264,5 @@ do
 
   fi
 done
+
+

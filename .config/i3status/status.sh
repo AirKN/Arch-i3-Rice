@@ -42,10 +42,10 @@ common() {
 }
 
 titlebar() {
-  name=$(~/.config/i3status/title.sh)
+  title=$(~/.config/i3status/title.sh)
   separator $bg "$color1"
   echo -n ",{"
-  echo -n "\"full_text\":\" $name                                                              \","
+  echo -n "\"full_text\":\" $title                                                     \","
   echo -n "\"color\":\"$textcl\","
   common
   echo -n "},"

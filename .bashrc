@@ -143,11 +143,6 @@ ex ()
 alias c='clear'
 alias shut='shutdown now'
 alias ei3='vim ~/.config/i3/config'
-alias mntsda2=". ~/./.mntsda2.sh"
-alias encjournal="~/./.journalenc.sh"
-alias decjournal="~/./.journaldec.sh"
 alias pacman="sudo pacman"
 
 PATH="/home/air/.local/bin:$PATH"
-
-source ~/.termddd.sh

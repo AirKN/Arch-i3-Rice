@@ -89,7 +89,7 @@ cpu_usage() {
 
 
 meteo() {
-  local bg="$color1"
+  local bg="#a89984"
   separator $bg "$color1"
   echo -n ",{"
   echo -n "\"name\":\"id_meteo\","
@@ -119,10 +119,9 @@ battery() {
 		6[1-9]|7[0-9]|80) icon="" ;;
 		8[1-9]|9[0-9]|100) icon="" ;;
 		*) icon="❓" ;
-	esac && [ "$prct" -le 25 ] && printf "⚠️ "
-	;;
-	*) icon="❓" ;;
-	esac
+	esac && [ "$prct" -le 25 ] && printf "⚠️ ";;
+	*) icon="⚡🔄" ;;
+    esac
     echo -n ",{"
     echo -n "\"name\":\"battery0\","
     echo -n "\"full_text\":\" ${icon}  ${prct}% \","
@@ -205,10 +204,10 @@ echo '[]'                   # We send an empty first array of blocks to make the
 do
   echo -n ",["
   titlebar
+  meteo
   disk_usage
   memory
   cpu_usage
-  #meteo
   battery
   volume
   mydate
@@ -247,8 +246,8 @@ $(ps axch -o cmd:40,%mem --sort:-%mem | head)"
     notify-send "Yes, This is Time ⌚, Yes"
 
   # METEO
-  #elif [[ $line == *"name"*"id_meteo"* ]]; then
-  #  alacritty -e w3m wttr.in/Tunisia
+  elif [[ $line == *"name"*"id_meteo"* ]]; then
+    alacritty -e curl wttr.in/manouba & 
 
  # BATTERY
   elif [[ $line == *"name"*"battery0"* ]]; then

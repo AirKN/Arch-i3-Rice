@@ -105,40 +105,14 @@ battery() {
     local bg="#689d6a"
     bg_separator_previous=$bg
     separator $bg "$bg"
-
-  if [ -f /sys/class/power_supply/BAT0/uevent ]; then
-    prct=$(cat /sys/class/power_supply/BAT0/uevent | grep "POWER_SUPPLY_CAPACITY=" | cut -d'=' -f2)
-    charging=$(cat /sys/class/power_supply/BAT0/uevent | grep "POWER_SUPPLY_STATUS" | cut -d'=' -f2) # POWER_SUPPLY_STATUS=Discharging|Charging
-    case "$charging" in
-	"Full") icon="⚡" ;;
-	"Discharging")
-    	case "$prct" in
-		[0-9]|1[0-9]|20) icon="" ;;
-		2[1-9]|3[0-9]|40) icon="" ;;
-		4[1-9]|5[0-9]|60) icon="" ;;
-		6[1-9]|7[0-9]|80) icon="" ;;
-		8[1-9]|9[0-9]|100) icon="" ;;
-		*) icon="❓" ;
-	esac && [ "$prct" -le 25 ] && printf "⚠️ ";;
-	*) icon="⚡🔄" ;;
-    esac
     echo -n ",{"
     echo -n "\"name\":\"battery0\","
-    echo -n "\"full_text\":\" ${icon}  ${prct}% \","
+    echo -n "\"full_text\":\" $(~/.config/i3status/battery.sh) \","
     echo -n "\"color\":\"$textcl\","
     echo -n "\"background\":\"$bg\","
     common
     echo -n "},"
-  else
-    echo -n ",{"
-    echo -n "\"name\":\"battery0\","
-    echo -n "\"full_text\":\" 🔌 Plugged \","
-    echo -n "\"color\":\"$textcl\","
-    echo -n "\"background\":\"$bg\","
-    common
-    echo -n "},"
-
-  fi
+  
 }
 
 
@@ -223,22 +197,22 @@ do
   # echo $line > /home/you/gitclones/github/i3/tmp.txt
   # {"name":"id_vpn","button":1,"modifiers":["Mod2"],"x":2982,"y":9,"relative_x":67,"relative_y":9,"width":95,"height":22}
 
- # CPU
+  # CPU
   if [[ $line == *"name"*"id_cpu_usage"* ]]; then
     notify-send "CPU Temperature: $(sensors | awk '/^CPU:/ {print $2}')"
     notify-send "Most CPU intensive processes(by %):
 $(ps axch -o cmd:40,%cpu --sort:-%cpu | head)"
-
+  # MEMORY
   elif [[ $line == *"name"*"id_memory"* ]]; then
     notify-send "Most Memory intensive processes(by %):
 $(ps axch -o cmd:40,%mem --sort:-%mem | head)"
   
+  # DISK 
   elif [[ $line == *"name"*"id_disk_usage"* ]]; then
     notify-send "$(df -h)"
 
   # DATE
   elif [[ $line == *"name"*"id_date"* ]]; then
-    #alacritty -e ~/.config/i3status/click_time.sh &
     notify-send "$(cal --months 2)"
   
   # TIME

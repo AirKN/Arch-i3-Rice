@@ -1,1 +1,1 @@
-vimrc
+/home/air/.config/vim/vimrc

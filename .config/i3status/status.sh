@@ -45,7 +45,7 @@ titlebar() {
   title=$(~/.config/i3status/title.sh)
   separator $bg "$color1"
   echo -n ",{"
-  echo -n "\"full_text\":\" $title                                                     \","
+  echo -n "\"full_text\":\" $title \","
   echo -n "\"color\":\"$textcl\","
   common
   echo -n "},"
@@ -112,7 +112,7 @@ battery() {
     echo -n "\"background\":\"$bg\","
     common
     echo -n "},"
-  
+
 }
 
 
@@ -206,26 +206,26 @@ $(ps axch -o cmd:40,%cpu --sort:-%cpu | head)"
   elif [[ $line == *"name"*"id_memory"* ]]; then
     notify-send "Most Memory intensive processes(by %):
 $(ps axch -o cmd:40,%mem --sort:-%mem | head)"
-  
-  # DISK 
+
+  # DISK
   elif [[ $line == *"name"*"id_disk_usage"* ]]; then
     notify-send "$(df -h)"
 
   # DATE
   elif [[ $line == *"name"*"id_date"* ]]; then
     notify-send "$(cal --months 2)"
-  
+
   # TIME
   elif [[ $line == *"name"*"id_time"* ]]; then
     notify-send "Yes, This is Time ⌚, Yes"
 
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then
-    alacritty -e curl wttr.in/manouba & 
+    alacritty -e curl wttr.in/manouba &
 
  # BATTERY
   elif [[ $line == *"name"*"battery0"* ]]; then
-    notify-send "⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡"  
+    notify-send "⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡"
 
   # VOLUME
   elif [[ $line == *"name"*"id_volume"* ]]; then

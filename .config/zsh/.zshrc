@@ -129,7 +129,7 @@ alias \
 	shut='shutdown now' \
 	ei3='vim ~/.config/i3/config' \
 	dmenu_run='dmenu_run -nb "#1d2021" -sf "#282828" -sb "#fbf1c7" -nf "#cfc6a1"' \
-
+    dotg='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME' \
 
 alias \
 	lf="lfub" \

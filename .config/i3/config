@@ -300,7 +300,7 @@ exec rednotebook
 exec picom &
 exec xset -b
 exec r rate 300 50
-exec curl wttr.in/manouba > ~/.weatherreport
+exec curl 'wttr.in/Manouba?FTQ1' -s > ~/.weatherreport
 
 exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:lalt_lshift_toggle"
 #jp -variant ,,kana

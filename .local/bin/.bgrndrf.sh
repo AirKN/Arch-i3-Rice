@@ -1,3 +1,3 @@
 #!/bin/bash
 
-feh --randomize --bg-scale /home/air/Backgrounds/*
+feh --randomize --bg-scale /home/air/backgrounds/*

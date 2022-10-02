@@ -126,7 +126,7 @@ alias \
 	c='clear' \
 	hist='less $HISTFILE' \
 	gparted='sudo gparted' \
-	ei3='vim ~/.config/i3/config' \
+	ei3='nvim ~/.config/i3/config' \
 	dmenu_run='dmenu_run -nb "#1d2021" -sf "#282828" -sb "#fbf1c7" -nf "#cfc6a1"' \
     dg='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME' \
 
@@ -137,7 +137,7 @@ alias \
 	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
 #additional aliases:
 
-PATH="/home/air/.local/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 

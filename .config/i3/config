@@ -45,7 +45,7 @@ exec --no-startup-id nm-applet
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec st
 
 
 # kill focused window
@@ -287,8 +287,9 @@ bindsym $mod+Shift+s exec firefox
 bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/.bgrndrf.sh
 bindsym $mod+s exec ~/.local/bin/dmenuunicode
 bindsym $mod+v exec ~/.local/bin/dmenumount
-bindsym $mod+b exec ~/.local/bin/dmenuumount
+bindsym $mod+Shift+v exec ~/.local/bin/dmenuumount
 #bindsym $mod+a exec obsidian
+#bindsym $mod+b
 #bindsym $mod+z
 #bindsym $mod+x
 #bindsym $mod+Shift+w
@@ -298,7 +299,6 @@ exec --no-startup-id dunst
 exec --no-startup-id syncthing --no-browser
 exec firefox
 exec obsidian
-exec rednotebook
 exec picom &
 exec xset -b
 exec r rate 300 50

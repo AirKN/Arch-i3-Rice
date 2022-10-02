@@ -286,8 +286,8 @@ bindsym $mod+Shift+d exec thunar
 bindsym $mod+Shift+s exec firefox
 bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/.bgrndrf.sh
 bindsym $mod+s exec ~/.local/bin/dmenuunicode
-bindsym $mod+v exec ~/.local/bin/dmenumount
-bindsym $mod+Shift+v exec ~/.local/bin/dmenuumount
+bindsym $mod+F12 exec ~/.local/bin/dmenumount
+bindsym $mod+Shift+F12 exec ~/.local/bin/dmenuumount
 #bindsym $mod+a exec obsidian
 #bindsym $mod+b
 #bindsym $mod+z

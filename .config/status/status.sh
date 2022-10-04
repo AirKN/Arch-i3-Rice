@@ -53,7 +53,8 @@ titlebar() {
 
 
 disk_usage() {
-  local bg="#cc241d"
+  #local bg="#cc241d"
+  local bg=$color1
   separator $bg "$bg"
   echo -n ",{"
   echo -n "\"name\":\"id_disk_usage\","
@@ -66,7 +67,8 @@ disk_usage() {
 
 memory() {
   mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
-  local bg="#b16286"
+  local bg=$color1
+  #local bg="#b16286"
   echo -n ",{"
   echo -n "\"name\":\"id_memory\","
   echo -n "\"full_text\":\" 📝 $mem \","
@@ -77,7 +79,8 @@ memory() {
 }
 
 cpu_usage() {
-  local bg="#458588"
+  local bg=$color1
+  #local bg="#458588"
   echo -n ",{"
   echo -n "\"name\":\"id_cpu_usage\","
   echo -n "\"full_text\":\" 🧠 $(~/.config/status/cpu.py)% \","
@@ -89,7 +92,8 @@ cpu_usage() {
 
 
 meteo() {
-  local bg="#a89984"
+  local bg=$color1
+  #local bg="#a89984"
   separator $bg "$color1"
   echo -n ",{"
   echo -n "\"name\":\"id_meteo\","
@@ -102,7 +106,8 @@ meteo() {
 
 
 battery() {
-    local bg="#689d6a"
+    local bg=$color1
+    #local bg="#689d6a"
     bg_separator_previous=$bg
     separator $bg "$bg"
     echo -n ",{"
@@ -117,8 +122,9 @@ battery() {
 
 
 volume() {
+  local bg=$color1
   vol=$(pamixer --get-volume)
-  local bg="#b8bb26"
+  #local bg="#b8bb26"
   bg_separator_previous=$bg
   separator $bg "$bg"
   echo -n ",{"
@@ -136,7 +142,8 @@ volume() {
 
 
 mydate() {
-  local bg="#fabd2f"
+  local bg=$color1
+  #local bg="#fabd2f"
   separator $bg "$bg"
   echo -n ",{"
   echo -n "\"name\":\"id_date\","
@@ -148,7 +155,8 @@ mydate() {
 }
 
 mytime() {
-  local bg="#cc241d"
+  local bg=$color1
+  #local bg="#cc241d"
   separator $bg "$bg"
   echo -n ",{"
   echo -n "\"name\":\"id_time\","

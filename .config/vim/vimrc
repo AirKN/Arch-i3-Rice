@@ -1,6 +1,12 @@
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
+let g:gruvbox_termcolors=16
+set bg=dark
+let g:gruvbox_italic=1
+colo gruvbox
+
+
 set hlsearch
 set incsearch
 

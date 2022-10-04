@@ -221,7 +221,7 @@ $(ps axch -o cmd:40,%mem --sort:-%mem | head)"
 
   # METEO
   elif [[ $line == *"name"*"id_meteo"* ]]; then
-    alacritty -e curl wttr.in/manouba &
+    st -e curl wttr.in/manouba &
 
  # BATTERY
   elif [[ $line == *"name"*"battery0"* ]]; then
@@ -229,7 +229,7 @@ $(ps axch -o cmd:40,%mem --sort:-%mem | head)"
 
   # VOLUME
   elif [[ $line == *"name"*"id_volume"* ]]; then
-    alacritty -e alsamixer &
+    st -e alsamixer &
 
   # LOGOUT
   elif [[ $line == *"name"*"id_logout"* ]]; then

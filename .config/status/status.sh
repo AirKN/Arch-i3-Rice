@@ -147,7 +147,7 @@ mydate() {
   separator $bg "$bg"
   echo -n ",{"
   echo -n "\"name\":\"id_date\","
-  echo -n "\"full_text\":\" 📅 $(date "+%a %d %b %Y") \","
+  echo -n "\"full_text\":\" 📅 $(date "+%a %d %b") \","
   echo -n "\"background\":\"$bg\","
   echo -n "\"color\":\"$textcl\","
   common

@@ -16,93 +16,93 @@ textcl="#fbf1c7"
 # @params {string} $2 background color, ex: "#FF0000"
 
 
-separator() {
-  echo -n "{"
-  echo -n "\"full_text\":\"\"," # CTRL+Ue0b2
-  echo -n "\"separator\":false,"
-  echo -n "\"separator_block_width\":0,"
-  echo -n "\"border\":\"$bg_bar_color\","
-  echo -n "\"border_left\":0,"
-  echo -n "\"border_right\":0,"
-  echo -n "\"border_top\":2,"
-  echo -n "\"border_bottom\":2,"
-  echo -n "\"color\":\"$1\","
-  echo -n "\"background\":\"$2\""
-  echo -n "}"
-}
+    separator() {
+      echo -n "{"
+      echo -n "\"full_text\":\"\"," # CTRL+Ue0b2
+      echo -n "\"separator\":false,"
+      echo -n "\"separator_block_width\":0,"
+      echo -n "\"border\":\"$bg_bar_color\","
+      echo -n "\"border_left\":0,"
+      echo -n "\"border_right\":0,"
+      echo -n "\"border_top\":2,"
+      echo -n "\"border_bottom\":2,"
+      echo -n "\"color\":\"$1\","
+      echo -n "\"background\":\"$2\""
+      echo -n "}"
+    }
 
-common() {
-  echo -n "\"border\": \"$bg_bar_color\","
-  echo -n "\"separator\":false,"
-  echo -n "\"separator_block_width\":0,"
-  echo -n "\"border_top\":2,"
-  echo -n "\"border_bottom\":2,"
-  echo -n "\"border_left\":0,"
-  echo -n "\"border_right\":0"
-}
+    common() {
+      echo -n "\"border\": \"$bg_bar_color\","
+      echo -n "\"separator\":false,"
+      echo -n "\"separator_block_width\":0,"
+      echo -n "\"border_top\":2,"
+      echo -n "\"border_bottom\":2,"
+      echo -n "\"border_left\":0,"
+      echo -n "\"border_right\":0"
+    }
 
-titlebar() {
-  title=$(~/.config/status/title.sh)
-  separator $bg "$color1"
-  echo -n ",{"
-  echo -n "\"full_text\":\" $title \","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "},"
-}
-
-
-disk_usage() {
-  #local bg="#cc241d"
-  local bg=$color1
-  separator $bg "$bg"
-  echo -n ",{"
-  echo -n "\"name\":\"id_disk_usage\","
-  echo -n "\"full_text\":\" 📂 $(~/.config/status/disk.py)% \","
-  echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "}"
-}
-
-memory() {
-  mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
-  local bg=$color1
-  #local bg="#b16286"
-  echo -n ",{"
-  echo -n "\"name\":\"id_memory\","
-  echo -n "\"full_text\":\" 📝 $mem \","
-  echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "}"
-}
-
-cpu_usage() {
-  local bg=$color1
-  #local bg="#458588"
-  echo -n ",{"
-  echo -n "\"name\":\"id_cpu_usage\","
-  echo -n "\"full_text\":\" 🧠 $(~/.config/status/cpu.py)% \","
-  echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "},"
-}
+    titlebar() {
+      title=$(~/.config/status/title.sh)
+      separator $bg "$bg"
+      echo -n ",{"
+      echo -n "\"full_text\":\" $title \","
+      echo -n "\"color\":\"$textcl\","
+      common
+      echo -n "},"
+    }
 
 
-meteo() {
-  local bg=$color1
-  #local bg="#a89984"
-  separator $bg "$color1"
-  echo -n ",{"
-  echo -n "\"name\":\"id_meteo\","
-  echo -n "\"full_text\":\" $(~/.config/status/meteo.sh) \","
-  echo -n "\"background\":\"$bg\","
-  echo -n "\"color\":\"$textcl\","
-  common
-  echo -n "},"
-}
+    meteo() {
+      local bg=$color1
+      #local bg="#a89984"
+      separator $textcl $bg
+      echo -n ",{"
+      echo -n "\"name\":\"id_meteo\","
+      echo -n "\"full_text\":\" $(~/.config/status/meteo.sh) \","
+      echo -n "\"background\":\"$bg\","
+      echo -n "\"color\":\"$textcl\","
+      common
+      echo -n "},"
+    }
+
+
+    disk_usage() {
+      #local bg="#cc241d"
+      local bg=$color1
+      separator $bg "$bg"
+      echo -n ",{"
+      echo -n "\"name\":\"id_disk_usage\","
+      echo -n "\"full_text\":\" 📂 $(~/.config/status/disk.py)% \","
+      echo -n "\"background\":\"$bg\","
+      echo -n "\"color\":\"$textcl\","
+      common
+      echo -n "}"
+    }
+
+    memory() {
+      mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+      local bg=$color1
+      #local bg="#b16286"
+      echo -n ",{"
+      echo -n "\"name\":\"id_memory\","
+      echo -n "\"full_text\":\" 📝 $mem \","
+      echo -n "\"background\":\"$bg\","
+      echo -n "\"color\":\"$textcl\","
+      common
+      echo -n "}"
+    }
+
+    cpu_usage() {
+      local bg=$color1
+      #local bg="#458588"
+      echo -n ",{"
+      echo -n "\"name\":\"id_cpu_usage\","
+      echo -n "\"full_text\":\" 🧠 $(~/.config/status/cpu.py)% \","
+      echo -n "\"background\":\"$bg\","
+      echo -n "\"color\":\"$textcl\","
+      common
+      echo -n "},"
+    }
 
 
 battery() {

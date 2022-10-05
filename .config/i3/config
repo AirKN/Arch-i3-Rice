@@ -285,7 +285,7 @@ bindsym $mod+Shift+t exec rhythmbox
 bindsym $mod+Shift+w exec rhythmbox-client --play-pause; exec rhythmbox-client --set-volume 0.3
 bindsym $mod+Shift+d exec thunar
 bindsym $mod+Shift+s exec firefox
-bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/bgrndrf.sh
+bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/bgrndrf
 bindsym $mod+s exec ~/.local/bin/dmenuunicode
 bindsym $mod+F12 exec ~/.local/bin/dmenumount
 bindsym $mod+Shift+F12 exec ~/.local/bin/dmenuumount
@@ -295,7 +295,7 @@ bindsym $mod+Shift+F12 exec ~/.local/bin/dmenuumount
 #bindsym $mod+x
 #bindsym $mod+Shift+w
 
-exec --no-startup-id ~/.local/bin/bgrndrf.sh
+exec --no-startup-id ~/.local/bin/bgrndrf
 exec --no-startup-id dunst
 exec --no-startup-id syncthing --no-browser
 exec firefox

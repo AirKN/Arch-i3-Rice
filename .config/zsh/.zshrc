@@ -71,6 +71,8 @@ lfcd () {
 }
 bindkey -s '^o' '^ulfcd\n'
 
+bindkey -s '^p' '^usxb\n'
+
 bindkey -s '^a' '^ubc -lq\n'
 
 bindkey -s '^f' '^ucd "$(dirname "$(fzf)")"\n'
@@ -130,9 +132,10 @@ alias \
 
 alias \
 	lf="lfub" \
-	magit="nvim -c MagitOnly" \
+    sxb="sxiv -tf *" \
+	#magit="nvim -c MagitOnly" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
-	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
+	#weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
 #additional aliases:
 
 PATH="$HOME/.local/bin:$PATH"

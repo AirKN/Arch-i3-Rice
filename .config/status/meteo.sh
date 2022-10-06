@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-echo -n ☔$(cat ~/.weatherreport | sed -n 14p | sed -e 's/^[[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d')
+echo -n ☔ $(cat ~/.weatherreport | sed -n 14p | sed -e 's/^[[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d')
 
 echo -n ' '
 

@@ -129,6 +129,11 @@ alias \
 	ei3='nvim ~/.config/i3/config' \
 	dmenu_run='dmenu_run -nb "#1d2021" -sf "#282828" -sb "#fbf1c7" -nf "#cfc6a1"' \
     dg='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME' \
+    gs='git status' \
+    ga='git add' \
+    gm='git commit -m' \
+    gp='git push' \
+    sst='sudo systemctl' \
 
 alias \
 	lf="lfub" \

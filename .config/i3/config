@@ -255,7 +255,7 @@ bar {
 }
 
 #disables title bars completely, MUST BE AFTER I3STATUS
-font pango:DejaVu Sans Mono 0
+#font pango:DejaVu Sans Mono 0
 
 
 bindsym $mod+shift+x exec i3lock --color "$bg-color"

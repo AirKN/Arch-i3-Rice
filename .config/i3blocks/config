@@ -15,13 +15,20 @@ separator=true
 separator_block_width=5
 
 [i3-focusedwindow]
+color=#fbf1c7
 command=~/.config/i3blocks/i3-focusedwindow
 interval=persist
 
-[meteo]
+[weather]
 color=#fbf1c7
 command=~/.config/i3blocks/meteo.sh
-interval=1
+interval=300
+signal=2
+
+[DISK]
+color=#fbf1c7
+command=df -h / | awk '/\//{ printf(" 💾 %4s/%s \n", $4, $2) }'
+interval=2
 
 [memory]
 color=#fbf1c7
@@ -34,17 +41,6 @@ color=#fbf1c7
 label=🧠
 command=~/.config/i3blocks/cpu.py
 interval=1
-
-[SOUND_BURST]
-command=~/.config/i3blocks/sound/sound_burst.sh
-interval=once
-
-[SOUND]
-full_text= 🔇:  0%
-command=~/.config/i3blocks/sound/sound_info.sh
-interval=0
-signal=1
-
 
 [date]
 color=#fbf1c7

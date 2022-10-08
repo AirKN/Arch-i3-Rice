@@ -1,3 +1,7 @@
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+
 let g:gruvbox_termcolors=16
 set bg=dark
 let g:gruvbox_italic=1
@@ -18,11 +22,14 @@ imap ,, <esc>:keepp /<++><CR>ca<
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'preservim/nerdtree'
 Plug 'junegunn/goyo.vim'
-Plug 'jreybert/vimagit'
+"Plug 'jreybert/vimagit'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
-Plug 'ap/vim-css-color'
+"Plug 'ap/vim-css-color'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 call plug#end()
+
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 set hlsearch
 set incsearch
@@ -31,19 +38,27 @@ set clipboard=unnamedplus
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-
+set termguicolors
 set expandtab
 set autoindent
 set smartindent
 set fileformat=unix
 set mouse=a
 
+nnoremap c "_c
+set nocompatible
+filetype plugin on
 syntax on
 set encoding=utf-8
 set number relativenumber
 
 set wildmode=longest,list,full
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+vnoremap . :normal .<CR>
 
+map <leader>n :NERDTreeToggle<CR>
+
+map <leader>f :Goyo \| set bg=dark \| set linebreak<CR>
 
 set splitbelow splitright
 map <C-h> <C-w>h

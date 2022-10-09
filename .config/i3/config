@@ -285,8 +285,8 @@ bindsym $mod+Shift+d exec thunar
 bindsym $mod+Shift+s exec firefox
 bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/bgrndrf
 bindsym $mod+s exec ~/.local/bin/dmenuunicode
-bindsym $mod+F12 exec ~/.local/bin/dmenumount
-bindsym $mod+Shift+F12 exec ~/.local/bin/dmenuumount
+bindsym $mod+F9 exec ~/.local/bin/dmenumount
+bindsym $mod+10 exec ~/.local/bin/dmenuumount
 #bindsym $mod+a exec obsidian
 #bindsym $mod+b
 #bindsym $mod+z
@@ -300,7 +300,7 @@ exec firefox
 exec obsidian
 exec picom &
 exec xset -b
-exec r rate 300 50
+exec xset r rate 300 50
 exec curl 'wttr.in/Manouba?FTQ1' -s > ~/.weatherreport
 
 exec_always "setxkbmap -model pc104 -layout us,fr,ar -variant ,, -option grp:ctrl_shift_toggle"
@@ -308,9 +308,8 @@ exec_always "setxkbmap -model pc104 -layout us,fr,ar -variant ,, -option grp:ctr
 
 #Screenshot bindings:
 #-----------------------------------
-bindsym Print exec scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
-
-bindsym --release Shift+Print exec scrot '/tmp/%F_%T_$wx$h.png' -s -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym Print exec printscr
+bindsym --release Shift+Print exec areaprintscr
 #-----------------------------------
 
 

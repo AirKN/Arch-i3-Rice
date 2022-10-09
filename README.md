@@ -1,2 +1,2 @@
-# my dotfiles
-currently i3, switching to dwm in the near future
+# my i3 dotfiles
+this is old, i no longer use i3, still keeping it just in case

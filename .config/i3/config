@@ -281,8 +281,6 @@ bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 bindsym $mod+p exec mypaint
 bindsym $mod+c exec vscodium
-bindsym $mod+Shift+t exec rhythmbox
-bindsym $mod+Shift+w exec rhythmbox-client --play-pause; exec rhythmbox-client --set-volume 0.3
 bindsym $mod+Shift+d exec thunar
 bindsym $mod+Shift+s exec firefox
 bindsym $mod+Shift+a exec --no-startup-id ~/.local/bin/bgrndrf

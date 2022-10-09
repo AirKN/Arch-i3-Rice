@@ -1,14 +1,6 @@
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
-
-let g:gruvbox_termcolors=16
-set bg=dark
-let g:gruvbox_italic=1
-colo gruvbox
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
-
-
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
@@ -20,16 +12,25 @@ map ,, :keepp /<++><CR>ca<
 imap ,, <esc>:keepp /<++><CR>ca<
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
+Plug 'lifepillar/vim-gruvbox8'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/goyo.vim'
+Plug 'airblade/vim-gitgutter'
 "Plug 'jreybert/vimagit'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
-"Plug 'ap/vim-css-color'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 call plug#end()
 
 let g:Hexokinase_highlighters = ['backgroundfull']
+
+
+let g:gruvbox_termcolors=16
+set bg=dark
+let g:gruvbox_italic=1
+colo gruvbox8
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+
 
 set hlsearch
 set incsearch
@@ -50,7 +51,7 @@ set nocompatible
 filetype plugin on
 syntax on
 set encoding=utf-8
-set number relativenumber
+set number
 
 set wildmode=longest,list,full
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
